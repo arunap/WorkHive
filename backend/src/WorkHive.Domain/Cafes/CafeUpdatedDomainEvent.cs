@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WorkHive.Domain.Shared;
 
-namespace WorkHive.Domain.Cafes.Events
+namespace WorkHive.Domain.Cafes
 {
     public class CafeUpdatedDomainEvent(Cafe cafe) : IDomainEvent
     {

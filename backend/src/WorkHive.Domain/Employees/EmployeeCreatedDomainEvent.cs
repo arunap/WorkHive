@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WorkHive.Domain.Shared;
 
-namespace WorkHive.Domain.Employees.Events
+namespace WorkHive.Domain.Employees
 {
     public class EmployeeCreatedDomainEvent(Employee employee) : IDomainEvent
     {
