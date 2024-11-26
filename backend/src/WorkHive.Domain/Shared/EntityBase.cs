@@ -1,9 +1,8 @@
 namespace WorkHive.Domain.Shared
 {
-    public class EntityBase<TKey>
+    public interface IEntityBase;
+    public class EntityBase : IEntityBase
     {
-        public TKey Id { get; set; } = default!;
-
         private readonly List<IDomainEvent> _domainEvents = [];
         public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
