@@ -11,5 +11,11 @@ namespace WorkHive.Application.Abstraction.Context
         public DbSet<Employee> Employees { get; }
         public DbSet<FileStore> FileStores { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+
+        // Expose methods for transaction handling
+        Task BeginTransactionAsync();
+        Task CommitTransactionAsync();
+        Task RollbackTransactionAsync();
     }
 }

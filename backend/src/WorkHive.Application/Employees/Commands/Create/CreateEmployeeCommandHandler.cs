@@ -30,8 +30,8 @@ namespace WorkHive.Application.Employees.Commands.Create
                 CafeId = (request.CafeId.HasValue && request.CafeId != Guid.Empty) ? request.CafeId : null,
             };
 
-            await _context.Employees.AddAsync(employee);
-            await _context.SaveChangesAsync();
+            await _context.Employees.AddAsync(employee, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
 
             return employee.Id;
         }

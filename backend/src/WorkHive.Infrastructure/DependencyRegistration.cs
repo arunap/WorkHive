@@ -6,6 +6,7 @@ using WorkHive.Application.Abstraction.Context;
 using WorkHive.Infrastructure.Database;
 using WorkHive.Infrastructure.Database.Seeds;
 using WorkHive.Infrastructure.Providers;
+using WorkHive.Infrastructure.Shared;
 
 namespace WorkHive.Infrastructure
 {
@@ -22,6 +23,7 @@ namespace WorkHive.Infrastructure
             services.AddScoped<CafeDataInitializer>();
             services.AddScoped<EmployeeDataInitializer>();
             services.AddScoped<IEmployeeIdProvider, EmployeeIdProvider>();
+            services.AddScoped<IImageUploader, ImageUploader>();
 
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 

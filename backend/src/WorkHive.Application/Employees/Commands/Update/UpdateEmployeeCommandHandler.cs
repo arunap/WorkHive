@@ -20,7 +20,7 @@ namespace WorkHive.Application.Employees.Commands.Update
 
         public async Task Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var item = await _context.Employees.FirstOrDefaultAsync(e => e.Id == request.EmployeeId) ?? throw new ItemNotFoundException(nameof(Employee), request.EmployeeId);
+            var item = await _context.Employees.FirstOrDefaultAsync(e => e.Id == request.EmployeeId, cancellationToken: cancellationToken) ?? throw new ItemNotFoundException(nameof(Employee), request.EmployeeId);
 
             item.Name = request.Name;
             item.EmailAddress = request.EmailAddress;

@@ -17,10 +17,10 @@ namespace WorkHive.Application.Employees.Commands.Delete
 
         public async Task Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var item = await _context.Employees.FirstOrDefaultAsync(e => e.Id == request.Id) ?? throw new ItemNotFoundException(nameof(Employee), request.Id);
+            var item = await _context.Employees.FirstOrDefaultAsync(e => e.Id == request.Id, cancellationToken: cancellationToken) ?? throw new ItemNotFoundException(nameof(Employee), request.Id);
 
             _context.Employees.Remove(item);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

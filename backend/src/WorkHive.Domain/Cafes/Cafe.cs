@@ -15,7 +15,7 @@ namespace WorkHive.Domain.Cafes
         public Guid? LogoId { get; set; }
 
         // navigation properties
-        public FileStore Logo { get; set; }
+        public FileStore? Logo { get; set; }
         public ICollection<Employee> Employees { get; set; } = [];
 
     }
