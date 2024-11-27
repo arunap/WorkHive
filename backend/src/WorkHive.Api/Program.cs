@@ -1,24 +1,36 @@
-var builder = WebApplication.CreateBuilder(args);
+using WorkHive.Api;
+using WorkHive.Api.Extensions;
+using WorkHive.Application;
+using WorkHive.Infrastructure;
 
+internal class Program
+{
+    private static async Task Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+        builder.Services
+            .AddApplication()
+            .AddPresentation()
+            .AddInfrastructure(builder.Configuration);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+        var app = builder.Build();
 
-var app = builder.Build();
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment()) { }
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) { }
+        await app.ApplyMigrationsAsync();
 
-app.UseSwagger();
+        await app.ApplySeedDataAsync();
 
-app.UseSwaggerUI();
+        app.UseSwaggerWithUI();
 
-app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
 
-app.UseAuthorization();
+        app.UseAuthorization();
 
-app.MapControllers();
+        app.MapControllers();
 
-app.Run();
+        app.Run();
+    }
+}

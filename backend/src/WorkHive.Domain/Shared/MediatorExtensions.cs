@@ -8,7 +8,7 @@ namespace WorkHive.Domain.Shared
         public static async Task DispatchDomainEvents(this IMediator mediator, DbContext context)
         {
             var entities = context.ChangeTracker
-                .Entries<EntityBase>()
+                .Entries<BaseEntity>()
                 .Where(e => e.Entity.DomainEvents.Count != 0)
                 .Select(e => e.Entity);
 
