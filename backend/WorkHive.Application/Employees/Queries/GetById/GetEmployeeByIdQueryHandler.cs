@@ -28,6 +28,7 @@ namespace WorkHive.Application.Employees.Queries.GetById
                                    Gender = employee.Gender,
                                    PhoneNumber = employee.PhoneNumber,
                                    CafeName = cafe.Name,
+                                   CafeId = cafe.Id,
                                    StartedAt = employee.StartedAt,
                                })
                    .SingleOrDefaultAsync(cancellationToken);
