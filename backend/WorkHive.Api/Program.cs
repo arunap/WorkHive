@@ -1,3 +1,4 @@
+using CafeConnect.Api.Middleware;
 using WorkHive.Api;
 using WorkHive.Api.Extensions;
 using WorkHive.Application;
@@ -23,6 +24,8 @@ internal class Program
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment()) { }
+
+        app.UseExceptionMiddleware();
 
         await app.ApplyMigrationsAsync();
 

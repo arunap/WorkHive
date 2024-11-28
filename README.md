@@ -56,7 +56,7 @@ with an MSSQL database, while the frontend provides an interactive user interfac
    ```
 5. Status:
 
-    <kbd><img src="./assets/docker-compose.jpg"  /></kbd>
+   <kbd><img src="./assets/docker-compose.jpg"  /></kbd>
 
 ---
 
@@ -117,19 +117,21 @@ with an MSSQL database, while the frontend provides an interactive user interfac
 
 ## Appendix
 
-<kbd><img src="./assets/swagger_api_docs.jpg" style="width:600px" /></kbd>
+<kbd><img src="./assets/table_structure.jpg"  /></kbd>
 
-<kbd><img src="./assets/docker_containers.jpg" style="width:600px"/></kbd>
+<kbd><img src="./assets/swagger_api_docs.jpg"  /></kbd>
 
-<kbd><img src="./assets/cafe_list.jpg" style="width:600px"/></kbd>
+<kbd><img src="./assets/docker_containers.jpg" /></kbd>
 
-<kbd><img src="./assets/cafe_add.jpg" style="width:600px"/></kbd>
+<kbd><img src="./assets/cafe_list.jpg" /></kbd>
 
-<kbd><img src="./assets/cafe_update.jpg" style="width:600px"/></kbd>
+<kbd><img src="./assets/cafe_add.jpg" /></kbd>
 
-<kbd><img src="./assets/cafe_view.jpg" style="width:600px"/></kbd>
+<kbd><img src="./assets/cafe_update.jpg" /></kbd>
 
-<kbd><img src="./assets/employee_list.jpg" style="width:600px"/></kbd>
+<kbd><img src="./assets/cafe_view.jpg" /></kbd>
+
+<kbd><img src="./assets/employee_list.jpg" /></kbd>
 
 ---
 

@@ -12,7 +12,7 @@ using WorkHive.Infrastructure.Database;
 namespace WorkHive.Infrastructure.Database.DbMigration.MSSQL
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241128020424_InitialTableStructure")]
+    [Migration("20241128072700_InitialTableStructure")]
     partial class InitialTableStructure
     {
         /// <inheritdoc />
@@ -130,7 +130,6 @@ namespace WorkHive.Infrastructure.Database.DbMigration.MSSQL
                         .HasColumnType("rowversion");
 
                     b.Property<DateTime?>("StartedAt")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

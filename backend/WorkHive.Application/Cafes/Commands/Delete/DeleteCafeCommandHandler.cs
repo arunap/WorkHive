@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WorkHive.Application.Abstraction.Context;
 using WorkHive.Domain.Cafes;
+using WorkHive.Domain.Employees;
 using WorkHive.Domain.Exceptions;
 
 namespace WorkHive.Application.Cafes.Commands.Delete
@@ -21,23 +22,22 @@ namespace WorkHive.Application.Cafes.Commands.Delete
             {
                 await _context.BeginTransactionAsync();
 
-                var cafe = await _context.Cafes
-                .Include(cafes => cafes.Employees)
-                .FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken: cancellationToken) ?? throw new ItemNotFoundException(nameof(Cafe), request.Id);
+                var cafe = await _context.Cafes.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken: cancellationToken) ?? throw new ItemNotFoundException(nameof(Cafe), request.Id);
 
                 // modify cafe name
                 cafe.Name = $"{cafe.Name}__deleted";
-                
+
+                _context.Cafes.Remove(cafe);
+                await _context.SaveChangesAsync(cancellationToken);
+
                 // modify email address
-                cafe.Employees.ToList().ForEach(e =>
+                List<Employee> employeesToDelete = await _context.Employees.Where(emp => emp.CafeId == request.Id).ToListAsync(cancellationToken: cancellationToken);
+                employeesToDelete.ForEach(e =>
                 {
                     e.EmailAddress = $"{e.EmailAddress}__deleted";
                 });
 
-                _context.Employees.RemoveRange(cafe.Employees);
-                await _context.SaveChangesAsync(cancellationToken);
-
-                _context.Cafes.Remove(cafe);
+                _context.Employees.RemoveRange(employeesToDelete);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 await _context.CommitTransactionAsync();

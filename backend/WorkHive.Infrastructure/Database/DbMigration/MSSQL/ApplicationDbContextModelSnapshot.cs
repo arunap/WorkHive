@@ -127,7 +127,6 @@ namespace WorkHive.Infrastructure.Database.DbMigration.MSSQL
                         .HasColumnType("rowversion");
 
                     b.Property<DateTime?>("StartedAt")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

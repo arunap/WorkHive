@@ -70,7 +70,9 @@ namespace WorkHive.Infrastructure.Database
         // Begin a new transaction
         public async Task BeginTransactionAsync()
         {
-            _currentTransaction = _currentTransaction != null ? await Database.BeginTransactionAsync() : throw new InvalidOperationException("Transaction already started.");
+            if (_currentTransaction != null) throw new InvalidOperationException("Transaction already started.");
+
+            _currentTransaction = await Database.BeginTransactionAsync();
         }
 
         // Commit the current transaction

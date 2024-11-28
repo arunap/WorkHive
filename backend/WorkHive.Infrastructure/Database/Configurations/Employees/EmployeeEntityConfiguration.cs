@@ -31,7 +31,7 @@ namespace WorkHive.Infrastructure.Database.Configurations.Employees
 
             builder.Property(e => e.StartedAt)
                 .HasConversion<DateTime>()
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(c => c.RowVersion)
                 .IsRowVersion()
