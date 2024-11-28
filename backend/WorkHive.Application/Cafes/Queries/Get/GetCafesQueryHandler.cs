@@ -17,7 +17,7 @@ namespace WorkHive.Application.Cafes.Queries.Get
 
         public async Task<List<CafesByLocationResult>> Handle(GetCafesQuery request, CancellationToken cancellationToken)
         {
-            var query = from c in _context.Cafes
+            var query = from c in _context.Cafes.Where(cafe => string.IsNullOrEmpty(request.Location) || cafe.Location.Contains(request.Location))
                         join e in _context.Employees on c.Id equals e.CafeId into employeeGroup
                         from e in employeeGroup.DefaultIfEmpty() // Left join for Employees
                         join f in _context.FileStores on c.LogoId equals f.Id into fileGroup
