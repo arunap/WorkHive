@@ -32,7 +32,6 @@ namespace WorkHive.Application.Cafes.Commands.Update
             item.Location = request.Location;
             item.Description = request.Description;
 
-            await _context.Cafes.AddAsync(item, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
         }
     }

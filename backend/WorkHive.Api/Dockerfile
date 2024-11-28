@@ -29,6 +29,7 @@ COPY --from=build /app/out .
 
 # Expose the port on which the app will run
 EXPOSE 8080
+EXPOSE 443
 
 # Set the entry point to run the app
 ENTRYPOINT ["dotnet", "WorkHive.Api.dll"]

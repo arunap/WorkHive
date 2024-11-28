@@ -34,8 +34,6 @@ internal class Program
 
         app.UseCors("React.Client");
 
-        app.UseHttpsRedirection();
-
         app.UseAuthorization();
 
         app.MapControllers();

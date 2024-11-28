@@ -24,23 +24,6 @@ const CafeDetails = () => {
   const { data: employeeData, error, isLoading } = useGetEmployeesQuery(cafe);
 
   const columnDefs = [
-    // {
-    //   headerName: "Photo",
-    //   field: "photo",
-    //   autoHeight: true,
-    //   cellRenderer: (params) => (
-    //     <Avatar
-    //       alt={params.value}
-    //       sx={{
-    //         bgcolor: "#f0f0f0",
-    //         width: 40,
-    //         height: 40,
-    //         borderRadius: "50%",
-    //         margin: "5px",
-    //       }}
-    //     />
-    //   ),
-    // },
     { headerName: "Employee ID", field: "employeeId", sortable: true, filter: true, flex: 1 },
     { headerName: "Name", field: "name", sortable: true, filter: true, flex: 1 },
     { headerName: "Email", field: "emailAddress", sortable: true, filter: true, flex: 1 },
