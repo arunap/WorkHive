@@ -54,6 +54,9 @@ with an MSSQL database, while the frontend provides an interactive user interfac
    frontend: http://localhost:3200/
    backend: http://localhost:5200/index.html
    ```
+5. Status:
+
+    <kbd><img src="./assets/docker-compose.jpg"  /></kbd>
 
 ---
 
