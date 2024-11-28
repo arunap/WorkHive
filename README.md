@@ -51,9 +51,11 @@ with an MSSQL database, while the frontend provides an interactive user interfac
    ```
 4. The Application URLs:
    ```
-   backend API: http://localhost:5200/index.html
-   frontend API: http://localhost:3200/
+   frontend: http://localhost:3200/
+   backend: http://localhost:5200/index.html
    ```
+
+---
 
 ## Setup & Installation (Manual)
 
