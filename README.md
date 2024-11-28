@@ -24,7 +24,7 @@ This is a Cafe Management Application developed using .NET Core 8 for the backen
 - **React Router**: Used for routing and navigation across the application.
 - **Axios**: A promise-based HTTP client used for making API calls to the backend.
 - **TanStack Query**: Used for managing queries and mutations, providing an efficient way to fetch and manipulate data.
-- **React Data Grid (ag-grid-react)**: Provides advanced data grid functionalities for displaying large sets of tabular data.
+- **React Data Grid**: Provides advanced data grid functionalities for displaying large sets of tabular data. `ag-grid-react`
 - **Material UI**: A React component library for building stylish and responsive UIs with pre-built components.
 - **React Hook Form**: A library used for handling forms in React with minimal re-renders and efficient validation. `react-hook-form`
 

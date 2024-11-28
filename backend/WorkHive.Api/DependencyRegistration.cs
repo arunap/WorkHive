@@ -1,5 +1,8 @@
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
+using WorkHive.Api.Dtos;
 
 namespace WorkHive.Api
 {
@@ -13,8 +16,21 @@ namespace WorkHive.Api
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            })
+            .ConfigureApiBehaviorOptions(options =>
+            {
+                options.InvalidModelStateResponseFactory = context =>
+                {
+                    var errors = context.ModelState.Where(m => m.Value.Errors.Count > 0).SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage);
+                    var response = new ErrorDto
+                    {
+                        StatusCode = (int)HttpStatusCode.BadRequest,
+                        Message = "Validation errors occurred",
+                        Errors = [.. errors],
+                    };
+                    return new BadRequestObjectResult(response);
+                };
             });
-
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
