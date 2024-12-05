@@ -5,15 +5,10 @@ using WorkHive.Application.Cafes.Queries.Dtos;
 
 namespace WorkHive.Application.Cafes.Queries.Get
 {
-    public class GetCafesQueryHandler : IRequestHandler<GetCafesQuery, List<CafesByLocationResult>>
+    public class GetCafesQueryHandler(IApplicationDbContext context) : IRequestHandler<GetCafesQuery, List<CafesByLocationResult>>
     {
 
-        private readonly IApplicationDbContext _context;
-
-        public GetCafesQueryHandler(IApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IApplicationDbContext _context = context;
 
         public async Task<List<CafesByLocationResult>> Handle(GetCafesQuery request, CancellationToken cancellationToken)
         {

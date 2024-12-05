@@ -5,16 +5,10 @@ using WorkHive.Domain.Cafes;
 
 namespace WorkHive.Application.Cafes.Commands.Create
 {
-    public class CreateCafeCommandHandler : IRequestHandler<CreateCafeCommand, Guid>
+    public class CreateCafeCommandHandler(IApplicationDbContext context, IImageUploader imageUploader) : IRequestHandler<CreateCafeCommand, Guid>
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IImageUploader _imageUploader;
-
-        public CreateCafeCommandHandler(IApplicationDbContext context, IImageUploader imageUploader)
-        {
-            _context = context;
-            _imageUploader = imageUploader;
-        }
+        private readonly IApplicationDbContext _context = context;
+        private readonly IImageUploader _imageUploader = imageUploader;
 
         public async Task<Guid> Handle(CreateCafeCommand request, CancellationToken cancellationToken)
         {
@@ -30,8 +24,12 @@ namespace WorkHive.Application.Cafes.Commands.Create
                 Location = request.Location
             };
 
+            // raise domain event
+            cafe.Raise(new CafeCreatedDomainEvent(cafe));
+            
             _context.Cafes.Add(cafe);
             await _context.SaveChangesAsync(cancellationToken);
+
 
             return cafe.Id;
         }

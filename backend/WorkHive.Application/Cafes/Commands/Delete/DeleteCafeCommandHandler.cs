@@ -7,14 +7,9 @@ using WorkHive.Domain.Exceptions;
 
 namespace WorkHive.Application.Cafes.Commands.Delete
 {
-    public class DeleteCafeCommandHandler : IRequestHandler<DeleteCafeCommand>
+    public class DeleteCafeCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteCafeCommand>
     {
-        private readonly IApplicationDbContext _context;
-
-        public DeleteCafeCommandHandler(IApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IApplicationDbContext _context = context;
 
         public async Task Handle(DeleteCafeCommand request, CancellationToken cancellationToken)
         {
@@ -36,6 +31,9 @@ namespace WorkHive.Application.Cafes.Commands.Delete
                 {
                     e.EmailAddress = $"{e.EmailAddress}__deleted";
                 });
+
+                // raise domain event
+                cafe.Raise(new CafeDeletedDomainEvent(cafe));
 
                 _context.Employees.RemoveRange(employeesToDelete);
                 await _context.SaveChangesAsync(cancellationToken);

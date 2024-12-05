@@ -58,7 +58,7 @@ namespace WorkHive.UnitTests.Cafes.Commands
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
-            var insertedCafe = _context.Cafes.FirstOrDefault(x => x.Id == result);
+            var insertedCafe = _context.Cafes.First(x => x.Id == result);
 
             // Assert
             var uploadedImg = _context.FileStores.FirstOrDefault(x => x.Id == insertedCafe.LogoId);

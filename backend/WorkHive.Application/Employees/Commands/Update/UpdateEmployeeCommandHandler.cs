@@ -7,16 +7,10 @@ using WorkHive.Domain.Exceptions;
 
 namespace WorkHive.Application.Employees.Commands.Update
 {
-    public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand>
+    public class UpdateEmployeeCommandHandler(IApplicationDbContext context, IDateTimeProvider dateTimeProvider) : IRequestHandler<UpdateEmployeeCommand>
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IDateTimeProvider _dateTimeProvider;
-
-        public UpdateEmployeeCommandHandler(IApplicationDbContext context, IDateTimeProvider dateTimeProvider)
-        {
-            _context = context;
-            _dateTimeProvider = dateTimeProvider;
-        }
+        private readonly IApplicationDbContext _context = context;
+        private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
 
         public async Task Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
@@ -28,6 +22,8 @@ namespace WorkHive.Application.Employees.Commands.Update
             item.Gender = request.Gender;
             item.CafeId = (request.CafeId.HasValue && request.CafeId != Guid.Empty) ? request.CafeId : null;
             item.StartedAt = (request.CafeId.HasValue && item.CafeId != request.CafeId.Value) ? _dateTimeProvider.UtcNow : item.StartedAt;
+
+            item.Raise(new EmployeeDeletedDomainEvent(item));
 
             await _context.SaveChangesAsync(cancellationToken);
         }

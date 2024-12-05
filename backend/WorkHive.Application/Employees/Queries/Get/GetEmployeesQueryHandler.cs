@@ -6,16 +6,10 @@ using WorkHive.Application.Employees.Queries.Dtos;
 
 namespace WorkHive.Application.Employees.Queries.Get
 {
-    public class GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, List<EmployeesByCafeNameResult>>
+    public class GetEmployeesQueryHandler(IApplicationDbContext context, IDateTimeProvider dateTimeProvider) : IRequestHandler<GetEmployeesQuery, List<EmployeesByCafeNameResult>>
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IDateTimeProvider _dateTimeProvider;
-
-        public GetEmployeesQueryHandler(IApplicationDbContext context, IDateTimeProvider dateTimeProvider)
-        {
-            _context = context;
-            _dateTimeProvider = dateTimeProvider;
-        }
+        private readonly IApplicationDbContext _context = context;
+        private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
 
         public async Task<List<EmployeesByCafeNameResult>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
         {

@@ -17,9 +17,9 @@ namespace WorkHive.Application.Employees.Commands.Create
                 .EmailAddress().WithMessage("A valid email address is required.");
 
             // PhoneNumber validation
-            // RuleFor(e => e.PhoneNumber)
-            //     .InclusiveBetween(80000000, 99999999)
-            //     .WithMessage("Phone number must start with 9 or 8 and contain exactly 8 digits.");
+            RuleFor(x => x.PhoneNumber)
+                .NotEmpty().WithMessage("Phone number is required.")
+                .Matches(@"^[89]\d{7}$").WithMessage("Phone number must start with 8 or 9 and contain exactly 8 digits.");
 
             // Gender validation
             RuleFor(x => x.Gender)

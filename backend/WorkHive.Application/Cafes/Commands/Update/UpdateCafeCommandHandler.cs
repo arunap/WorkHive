@@ -7,16 +7,10 @@ using WorkHive.Domain.Exceptions;
 
 namespace WorkHive.Application.Cafes.Commands.Update
 {
-    public class UpdateCafeCommandHandler : IRequestHandler<UpdateCafeCommand>
+    public class UpdateCafeCommandHandler(IApplicationDbContext context, IImageUploader imageUploader) : IRequestHandler<UpdateCafeCommand>
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IImageUploader _imageUploader;
-
-        public UpdateCafeCommandHandler(IApplicationDbContext context, IImageUploader imageUploader)
-        {
-            _context = context;
-            _imageUploader = imageUploader;
-        }
+        private readonly IApplicationDbContext _context = context;
+        private readonly IImageUploader _imageUploader = imageUploader;
 
         public async Task Handle(UpdateCafeCommand request, CancellationToken cancellationToken)
         {
@@ -32,7 +26,11 @@ namespace WorkHive.Application.Cafes.Commands.Update
             item.Location = request.Location;
             item.Description = request.Description;
 
+            // raise domain event
+            item.Raise(new CafeCreatedDomainEvent(item));
+
             await _context.SaveChangesAsync(cancellationToken);
+
         }
     }
 }

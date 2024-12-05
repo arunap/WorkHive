@@ -5,18 +5,11 @@ using WorkHive.Domain.Employees;
 
 namespace WorkHive.Application.Employees.Commands.Create
 {
-    public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, string>
+    public class CreateEmployeeCommandHandler(IApplicationDbContext context, IDateTimeProvider dateTimeProvider, IEmployeeIdProvider employeeIdProvider) : IRequestHandler<CreateEmployeeCommand, string>
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IDateTimeProvider _dateTimeProvider;
-        private readonly IEmployeeIdProvider _employeeIdProvider;
-
-        public CreateEmployeeCommandHandler(IApplicationDbContext context, IDateTimeProvider dateTimeProvider, IEmployeeIdProvider employeeIdProvider)
-        {
-            _context = context;
-            _dateTimeProvider = dateTimeProvider;
-            _employeeIdProvider = employeeIdProvider;
-        }
+        private readonly IApplicationDbContext _context = context;
+        private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+        private readonly IEmployeeIdProvider _employeeIdProvider = employeeIdProvider;
 
         public async Task<string> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
@@ -31,6 +24,8 @@ namespace WorkHive.Application.Employees.Commands.Create
                 StartedAt = request.CafeId.HasValue ? _dateTimeProvider.UtcNow : null
             };
 
+            employee.Raise(new EmployeeCreatedDomainEvent(employee));
+            
             await _context.Employees.AddAsync(employee, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 

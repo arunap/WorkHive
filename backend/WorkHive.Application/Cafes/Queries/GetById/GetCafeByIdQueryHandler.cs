@@ -7,14 +7,9 @@ using WorkHive.Domain.Exceptions;
 
 namespace WorkHive.Application.Cafes.Queries.GetById
 {
-    public class GetCafeByIdQueryHandler : IRequestHandler<GetCafeByIdQuery, CafeResult>
+    public class GetCafeByIdQueryHandler(IApplicationDbContext context) : IRequestHandler<GetCafeByIdQuery, CafeResult>
     {
-        private readonly IApplicationDbContext _context;
-
-        public GetCafeByIdQueryHandler(IApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IApplicationDbContext _context = context;
 
         public async Task<CafeResult> Handle(GetCafeByIdQuery request, CancellationToken cancellationToken)
         {

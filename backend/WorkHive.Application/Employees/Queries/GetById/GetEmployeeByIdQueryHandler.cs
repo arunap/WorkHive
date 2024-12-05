@@ -5,14 +5,9 @@ using WorkHive.Application.Employees.Queries.Dtos;
 
 namespace WorkHive.Application.Employees.Queries.GetById
 {
-    public class GetEmployeeByIdQueryHandler : IRequestHandler<GetEmployeeByIdQuery, EmployeeResult>
+    public class GetEmployeeByIdQueryHandler(IApplicationDbContext context) : IRequestHandler<GetEmployeeByIdQuery, EmployeeResult>
     {
-        private readonly IApplicationDbContext _context;
-
-        public GetEmployeeByIdQueryHandler(IApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IApplicationDbContext _context = context;
 
         public async Task<EmployeeResult> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
         {
