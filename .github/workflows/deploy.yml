@@ -1,0 +1,50 @@
+name: Deploy to AWS
+
+on:
+    push:
+        branches: 
+            - development
+
+jobs:
+    deploy-backend:
+        name: Deploy backend API
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v3
+      
+            - name: Setup .NET Core
+              uses: actions/setup-dotnet@v3
+              with:
+                dotnet-version: 8.0.x
+      
+            - name: Restore Dependencies
+              working-directory: backend/WorkHive.Api
+              run: dotnet restore
+      
+            - name: Build Backend
+              working-directory: backend/WorkHive.Api
+              run: dotnet publish -c Release -o ./publish
+
+
+    deploy-frontend:
+        name: Deploy Frontend (React)
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+
+            - name: Install Dependencies
+              working-directory: frontend
+              run: npm install
+
+            - name: Build Frontend
+              working-directory: frontend
+              run: npm run build
