@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-backend:
-    name: Deploy Backend API (.NET Core 8)
+    name: Deploy Backend API (.NET 8)
     runs-on: ubuntu-latest
 
     steps:
