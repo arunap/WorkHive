@@ -23,7 +23,17 @@ jobs:
         working-directory: backend/WorkHive.Api
         run: dotnet restore
 
-      - name: Build Backend
+      - name: Run Unit Tests
+        working-directory: backend/WorkHive.UnitTests
+        run: dotnet test --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-test-results
+          path: ./TestResults
+
+      - name: Publish Backend
         working-directory: backend/WorkHive.Api
         run: dotnet publish -c Release -o ./publish
 
@@ -49,3 +59,12 @@ jobs:
         env:
           CI: false
         run: npm run build
+
+      - name: Run Unit Tests
+        run: npm test -- --coverage
+
+      - name: Upload Test Coverage Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-test-coverage
+          path: coverage/
