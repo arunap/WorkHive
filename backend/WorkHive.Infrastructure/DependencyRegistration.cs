@@ -5,6 +5,7 @@ using WorkHive.Application.Abstraction;
 using WorkHive.Application.Abstraction.Context;
 using WorkHive.Infrastructure.Database;
 using WorkHive.Infrastructure.Database.Seeds;
+using WorkHive.Infrastructure.Interceptors;
 using WorkHive.Infrastructure.Providers;
 using WorkHive.Infrastructure.Shared;
 
@@ -26,6 +27,7 @@ namespace WorkHive.Infrastructure
             services.AddScoped<IImageUploader, ImageUploader>();
 
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            services.AddScoped<AuditEntitySaveChangesInterceptor>();
 
             return services;
         }
@@ -34,9 +36,9 @@ namespace WorkHive.Infrastructure
         {
             string? connectionString = configuration.GetConnectionString("Database");
 
-            services.AddDbContext<ApplicationDbContext>(options => options
-                    .UseSqlServer(connectionString,
-                        builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            services.AddDbContext<ApplicationDbContext>((sp, options) => options
+                    .UseSqlServer(connectionString, builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
+                    .AddInterceptors(sp.GetRequiredService<AuditEntitySaveChangesInterceptor>()));
 
             services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
 

@@ -20,7 +20,7 @@ namespace WorkHive.Infrastructure.Database
                     connectionString,
                     builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
 
-            return new ApplicationDbContext(optionsBuilder.Options, null, null);
+            return new ApplicationDbContext(optionsBuilder.Options, null);
         }
     }
 }

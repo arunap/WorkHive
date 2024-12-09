@@ -17,7 +17,7 @@ namespace WorkHive.UnitTests
             var _mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var _mediator = new Mock<IMediator>();
 
-            return new ApplicationDbContext(options, _mediator.Object, _mockDateTimeProvider.Object);
+            return new ApplicationDbContext(options, _mediator.Object);
         }
     }
 }

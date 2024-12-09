@@ -2,7 +2,9 @@ using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
+using WorkHive.Api.Context;
 using WorkHive.Api.Dtos;
+using WorkHive.Application.Abstraction.Context;
 
 namespace WorkHive.Api
 {
@@ -37,6 +39,8 @@ namespace WorkHive.Api
 
             // ensures that all generated URLs are lowercase.
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddScoped<IUserContext, UserContextProvider>();
 
             return services;
         }
