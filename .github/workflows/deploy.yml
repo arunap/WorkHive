@@ -54,14 +54,15 @@ jobs:
         working-directory: frontend
         run: npm install
 
+      - name: Run Unit Tests
+        working-directory: frontend
+        run: npm test -- --coverage
+
       - name: Build Frontend
         working-directory: frontend
         env:
           CI: false
         run: npm run build
-
-      - name: Run Unit Tests
-        run: npm test -- --coverage
 
       - name: Upload Test Coverage Report
         uses: actions/upload-artifact@v3
