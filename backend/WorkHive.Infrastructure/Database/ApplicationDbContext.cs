@@ -2,7 +2,6 @@ using System.Reflection;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using WorkHive.Application.Abstraction;
 using WorkHive.Application.Abstraction.Context;
 using WorkHive.Domain.Cafes;
 using WorkHive.Domain.Employees;

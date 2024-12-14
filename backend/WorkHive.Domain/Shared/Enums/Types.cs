@@ -1,4 +1,4 @@
-namespace WorkHive.Domain.Enums
+namespace WorkHive.Domain.Shared.Enums
 {
     public enum GenderType
     {

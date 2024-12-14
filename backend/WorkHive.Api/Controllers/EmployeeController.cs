@@ -11,10 +11,9 @@ namespace WorkHive.Api.Controllers
 {
     [ApiController]
     [Route("api")]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-        public EmployeeController(IMediator mediator) => _mediator = mediator;
+        private readonly IMediator _mediator = mediator;
 
         // GET: api/Employee/{id}
         [HttpGet("Employee/{id}")]

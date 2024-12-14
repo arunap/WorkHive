@@ -1,5 +1,5 @@
 using MediatR;
-using WorkHive.Domain.Enums;
+using WorkHive.Domain.Shared.Enums;
 
 namespace WorkHive.Application.Employees.Commands.Update
 {

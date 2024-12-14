@@ -1,6 +1,6 @@
 using WorkHive.Domain.Cafes;
-using WorkHive.Domain.Enums;
 using WorkHive.Domain.Shared;
+using WorkHive.Domain.Shared.Enums;
 
 namespace WorkHive.Domain.Employees
 {

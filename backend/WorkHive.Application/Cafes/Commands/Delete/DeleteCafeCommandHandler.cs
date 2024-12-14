@@ -23,7 +23,6 @@ namespace WorkHive.Application.Cafes.Commands.Delete
                 cafe.Name = $"{cafe.Name}__deleted";
 
                 _context.Cafes.Remove(cafe);
-                await _context.SaveChangesAsync(cancellationToken);
 
                 // modify email address
                 List<Employee> employeesToDelete = await _context.Employees.Where(emp => emp.CafeId == request.Id).ToListAsync(cancellationToken: cancellationToken);
@@ -36,6 +35,7 @@ namespace WorkHive.Application.Cafes.Commands.Delete
                 cafe.Raise(new CafeDeletedDomainEvent(cafe));
 
                 _context.Employees.RemoveRange(employeesToDelete);
+
                 await _context.SaveChangesAsync(cancellationToken);
 
                 await _context.CommitTransactionAsync();

@@ -2,6 +2,7 @@ using WorkHive.Application.Abstraction.Context;
 using WorkHive.Application.Employees.Commands.Delete;
 using WorkHive.Domain.Employees;
 using WorkHive.Domain.Exceptions;
+using WorkHive.Domain.Shared.Enums;
 
 namespace WorkHive.UnitTests.Employees.Commands
 {
@@ -25,7 +26,7 @@ namespace WorkHive.UnitTests.Employees.Commands
                 Name = "John Doe",
                 EmailAddress = "johndoe@example.com",
                 PhoneNumber = "1234567890",
-                Gender = Domain.Enums.GenderType.Male,
+                Gender = GenderType.Male,
                 CafeId = Guid.NewGuid(),
                 StartedAt = DateTime.UtcNow.AddYears(-1)
             };
@@ -54,7 +55,7 @@ namespace WorkHive.UnitTests.Employees.Commands
                 Name = "John Doe",
                 EmailAddress = "johndoe@example.com",
                 PhoneNumber = "1234567890",
-                Gender = Domain.Enums.GenderType.Male,
+                Gender = GenderType.Male,
                 CafeId = Guid.NewGuid(),
                 StartedAt = DateTime.UtcNow.AddYears(-1)
             };

@@ -2,6 +2,7 @@ using Moq;
 using WorkHive.Application.Abstraction;
 using WorkHive.Application.Abstraction.Context;
 using WorkHive.Application.Employees.Commands.Create;
+using WorkHive.Domain.Shared.Enums;
 
 namespace WorkHive.UnitTests.Employees.Commands
 {
@@ -32,7 +33,7 @@ namespace WorkHive.UnitTests.Employees.Commands
             {
                 EmailAddress = "test@example.com",
                 PhoneNumber = "1234567890",
-                Gender = Domain.Enums.GenderType.Male,
+                Gender = GenderType.Male,
                 Name = "John Doe",
                 CafeId = Guid.NewGuid()
             };
@@ -55,7 +56,7 @@ namespace WorkHive.UnitTests.Employees.Commands
             {
                 EmailAddress = "test@example.com",
                 PhoneNumber = "1234567890",
-                Gender = Domain.Enums.GenderType.Male,
+                Gender = GenderType.Male,
                 Name = "John Doe",
                 CafeId = Guid.Empty // CafeId is empty
             };
@@ -79,7 +80,7 @@ namespace WorkHive.UnitTests.Employees.Commands
             {
                 EmailAddress = "test@example.com",
                 PhoneNumber = "1234567890",
-                Gender = Domain.Enums.GenderType.Male,
+                Gender = GenderType.Male,
                 Name = "John Doe",
                 CafeId = Guid.NewGuid()
             };

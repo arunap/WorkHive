@@ -3,6 +3,7 @@ using WorkHive.Application.Abstraction;
 using WorkHive.Application.Employees.Commands.Update;
 using WorkHive.Domain.Employees;
 using WorkHive.Domain.Exceptions;
+using WorkHive.Domain.Shared.Enums;
 
 namespace WorkHive.UnitTests.Employees.Commands
 {
@@ -27,7 +28,7 @@ namespace WorkHive.UnitTests.Employees.Commands
                 Name = "John Doe",
                 EmailAddress = "johndoe@example.com",
                 PhoneNumber = "1234567890",
-                Gender = Domain.Enums.GenderType.Male,
+                Gender = GenderType.Male,
                 CafeId = Guid.NewGuid(),
                 StartedAt = DateTime.UtcNow.AddYears(-1)
             };
@@ -41,7 +42,7 @@ namespace WorkHive.UnitTests.Employees.Commands
                 Name = "Jane Doe",
                 EmailAddress = "janedoe@example.com",
                 PhoneNumber = "0987654321",
-                Gender = Domain.Enums.GenderType.Female,
+                Gender = GenderType.Female,
                 CafeId = Guid.NewGuid() // New CafeId
             };
 
@@ -58,7 +59,7 @@ namespace WorkHive.UnitTests.Employees.Commands
             Assert.Equal("Jane Doe", existingEmployee.Name);
             Assert.Equal("janedoe@example.com", existingEmployee.EmailAddress);
             Assert.Equal("0987654321", existingEmployee.PhoneNumber);
-            Assert.Equal(Domain.Enums.GenderType.Female, existingEmployee.Gender);
+            Assert.Equal(GenderType.Female, existingEmployee.Gender);
             Assert.Equal(command.CafeId, existingEmployee.CafeId);
             Assert.NotEqual(currentUtcTime, existingEmployee.StartedAt);
         }
@@ -75,7 +76,7 @@ namespace WorkHive.UnitTests.Employees.Commands
                 Name = "Jane Doe",
                 EmailAddress = "janedoe@example.com",
                 PhoneNumber = "0987654321",
-                Gender = Domain.Enums.GenderType.Female
+                Gender = GenderType.Female
             };
 
             var currentUtcTime = DateTime.UtcNow;
@@ -99,7 +100,7 @@ namespace WorkHive.UnitTests.Employees.Commands
                 Name = "John Doe",
                 EmailAddress = "johndoe@example.com",
                 PhoneNumber = "1234567890",
-                Gender = Domain.Enums.GenderType.Male,
+                Gender = GenderType.Male,
                 CafeId = Guid.NewGuid(),
                 StartedAt = DateTime.UtcNow.AddYears(-1)
             };
@@ -113,7 +114,7 @@ namespace WorkHive.UnitTests.Employees.Commands
                 Name = "Jane Doe",
                 EmailAddress = "janedoe@example.com",
                 PhoneNumber = "0987654321",
-                Gender = Domain.Enums.GenderType.Female,
+                Gender = GenderType.Female,
                 CafeId = existingEmployee.CafeId // Same CafeId
             };
 
